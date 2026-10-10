@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DudiTechno — Manusia Biasa</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/CWm8ZVq.png" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              emeraldDeep: "#042018",
+              emeraldLight: "#0d4a3a",
+              goldAccent: "#f59e0b",
+              goldLight: "#fef3c7",
+              darkCard: "#111827",
+            },
+            fontFamily: {
+              serif: ["Playfair Display", "serif"],
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      body {
+        background-color: #030712;
+        color: #f3f4f6;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        overflow-x: hidden;
+      }
+      .editorial-title {
+        font-family: "Playfair Display", serif;
+      }
+      .glass-card {
+        background: rgba(17, 24, 39, 0.65);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .glass-pill {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+      @keyframes floatSlow {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(1deg);
+        }
+      }
+      @keyframes floatBounce {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-8px);
+        }
+      }
+      @keyframes pulseGlow {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.45;
+          transform: scale(1.1);
+        }
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-float-slow {
+        animation: floatSlow 6s ease-in-out infinite;
+      }
+      .animate-float-bounce {
+        animation: floatBounce 4s ease-in-out infinite;
+      }
+      .glow-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        z-index: 0;
+        pointer-events: none;
+        animation: pulseGlow 8s ease-in-out infinite;
+      }
+      .marquee-track {
+        display: flex;
+        width: 200%;
+        animation: marquee 25s linear infinite;
+      }
+      .interactive-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      .interactive-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        border-color: rgba(245, 158, 11, 0.5);
+        box-shadow: 0 20px 30px -10px rgba(245, 158, 11, 0.15);
+      }
+
+      /* Toast Style */
+      .toast {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #042018;
+        color: #fff;
+        text-align: center;
+        border-radius: 12px;
+        padding: 16px;
+        position: fixed;
+        z-index: 9999;
+        left: 50%;
+        bottom: 80px;
+        border: 1px solid #f59e0b;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      }
+      .toast.show {
+        visibility: visible;
+        animation:
+          fadein 0.5s,
+          fadeout 0.5s 2.5s;
+      }
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 80px;
+          opacity: 1;
+        }
+      }
+      @keyframes fadeout {
+        from {
+          bottom: 80px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body class="relative min-h-screen pb-32">
+    <!-- Ambient Glowing Orbs -->
+    <div
+      class="glow-orb w-72 sm:w-96 h-72 sm:h-96 bg-emerald-600/30 top-10 -left-20"
+    ></div>
+    <div
+      class="glow-orb w-64 sm:w-80 h-64 sm:h-80 bg-amber-500/20 top-1/3 -right-20"
+    ></div>
+    <div
+      class="glow-orb w-80 sm:h-[30rem] h-80 bg-emerald-900/40 bottom-20 left-1/4"
+    ></div>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12">
+      <!-- HEADER -->
+      <!-- HEADER -->
+      <header
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 sm:mb-16 border-b border-gray-800/80 pb-6"
+      >
+        <a href="#" class="flex items-center gap-3">
+          <!-- Frame Bungkus Gambar -->
+          <div
+            class="p-1.5 rounded-xl border border-amber-500/30 bg-amber-500/10 shadow-lg shadow-amber-500/10"
+          >
+            <img
+              src="https://i.imgur.com/CWm8ZVq.png"
+              alt="DudiTechno Logo"
+              class="h-10 sm:h-14 w-auto object-contain rounded-md"
+            />
+          </div>
+          <div>
+            <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-white">
+              DudiTechno
+            </h1>
+            <p class="text-xs text-gray-400">Manusia Biasa</p>
+          </div>
+        </a>
+        <div class="flex items-center gap-3 self-end sm:self-auto">
+          <span
+            class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-950/80 border border-emerald-500/30 rounded-full text-emerald-400 text-xs font-medium"
+          >
+            <span
+              class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"
+            ></span>
+            Pengembangan Aktif
+          </span>
+        </div>
+      </header>
+
+      <!-- HERO SECTION -->
+      <section class="mb-20 sm:mb-28">
+        <div
+          class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-300 text-xs font-mono mb-6 animate-float-bounce"
+        >
+          ✨ Manusia Biasa
+        </div>
+        <h2
+          class="editorial-title text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.15] text-gray-100 max-w-4xl"
+        >
+          Mencoba
+          <span
+            class="italic text-amber-400 font-normal underline decoration-amber-500/30 underline-offset-8"
+            >bermanfaat</span
+          >
+          untuk semua demi kebahagiaan dunia dan akhirat.
+        </h2>
+        <p
+          class="editorial-title italic text-xl sm:text-2xl text-gray-400 mt-4 mb-6"
+        >
+          Menjejaki masa depan dengan warisan kebaikan.
+        </p>
+        <p
+          class="mt-6 text-gray-400 text-sm sm:text-base max-w-2xl leading-relaxed"
+        >
+          Menghadirkan inovasi aplikasi Android islami, sistem manajemen
+          pembelajaran kustom (LMS), dan alat bantu pengelolaan data yang
+          dirancang penuh ketelitian.
+        </p>
+        <div
+          class="mt-8 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-gray-400 font-mono"
+        >
+          <div
+            class="flex items-center gap-2 bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800"
+          >
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-amber-400"></i>
+            Bebas Iklan
+          </div>
+          <div
+            class="flex items-center gap-2 bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800"
+          >
+            <i
+              data-lucide="check-circle-2"
+              class="w-4 h-4 text-emerald-400"
+            ></i>
+            Fokus Kebermanfaatan
+          </div>
+          <div
+            class="flex items-center gap-2 bg-gray-900/80 px-3 py-1.5 rounded-lg border border-gray-800"
+          >
+            <i data-lucide="check-circle-2" class="w-4 h-4 text-blue-400"></i>
+            Performa Ringan
+          </div>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a
+            href="#"
+            onclick="
+              trackDownload();
+              return false;
+            "
+            class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 group"
+          >
+            <i
+              data-lucide="download"
+              class="w-5 h-5 group-hover:translate-y-0.5 transition"
+            ></i>
+            Unduh AzanKu APK
+          </a>
+          <a
+            href="https://youtube.com/@duditechno"
+            target="_blank"
+            class="w-full sm:w-auto px-6 py-3.5 bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium rounded-xl transition border border-gray-700 flex items-center justify-center gap-2 text-sm"
+          >
+            <i data-lucide="youtube" class="w-4 h-4 text-amber-400"></i> YouTube
+            @duditechno
+          </a>
+        </div>
+      </section>
+
+      <!-- RUNNING MARQUEE -->
+      <div
+        class="mb-20 sm:mb-28 overflow-hidden glass-card rounded-2xl py-3 border-y border-amber-500/20"
+      >
+        <div
+          class="marquee-track font-mono text-xs text-amber-300/80 uppercase tracking-widest gap-8"
+        >
+          <span
+            >🕌 AzanKu Android App • 📊 Custom LMS Platform • ⚡ Google Apps
+            Script • 📍 GPS Precision • 🛡️ Zero Data Collection •
+          </span>
+          <span
+            >🕌 AzanKu Android App • 📊 Custom LMS Platform • ⚡ Google Apps
+            Script • 📍 GPS Precision • 🛡️ Zero Data Collection •
+          </span>
+        </div>
+      </div>
+
+      <!-- FEATURED SHOWCASE: AZANKU -->
+      <section id="azanku" class="mb-24 sm:mb-32">
+        <div class="flex items-center justify-between mb-8">
+          <h3
+            class="text-xl sm:text-2xl font-bold text-white flex items-center gap-3"
+          >
+            <i
+              data-lucide="sparkles"
+              class="w-6 h-6 text-amber-400 animate-spin"
+              style="animation-duration: 8s"
+            ></i>
+            Aplikasi Unggulan
+          </h3>
+          <span
+            class="text-xs font-mono text-gray-400 bg-gray-900 px-3 py-1 rounded-full border border-gray-800"
+            >Release v1.0 • APK</span
+          >
+        </div>
+        <div
+          class="glass-card rounded-3xl p-6 sm:p-10 md:p-12 relative overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-amber-500/20"
+        >
+          <div class="lg:col-span-7 space-y-6">
+            <div
+              class="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full text-amber-300 text-xs font-semibold"
+            >
+              🌙 Pengingat Shalat Presisi
+            </div>
+            <h4
+              class="editorial-title text-3xl sm:text-5xl text-white font-bold tracking-tight"
+            >
+              AzanKu
+            </h4>
+            <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+              Aplikasi pengingat waktu shalat presisi berbasis GPS otomatis.
+              Pengguna dapat mengkonfigurasi suara azan, nada dering kustom, dan
+              notifikasi pra-azan per waktu shalat dengan tampilan jernih tanpa
+              iklan.
+            </p>
+            <div
+              class="bg-gray-900/80 p-4 rounded-2xl border border-gray-800 space-y-3"
+            >
+              <div class="text-xs font-mono text-gray-400 flex justify-between">
+                <span>SIMULATOR NADA AZAN & JADWAL:</span
+                ><span class="text-emerald-400">● Live Preview</span>
+              </div>
+              <div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
+                <button
+                  onclick="changePrayer('Subuh', '04:28')"
+                  class="prayer-btn bg-emerald-900/60 border border-emerald-500/50 text-white p-2 rounded-xl text-center text-xs font-medium hover:bg-emerald-800 transition"
+                >
+                  Subuh<br /><span class="text-[10px] text-amber-300"
+                    >04:28</span
+                  >
+                </button>
+                <button
+                  onclick="changePrayer('Dzuhur', '11:42')"
+                  class="prayer-btn bg-gray-800/80 border border-gray-700 text-gray-300 p-2 rounded-xl text-center text-xs font-medium hover:bg-emerald-800 transition"
+                >
+                  Dzuhur<br /><span class="text-[10px] text-amber-300"
+                    >11:42</span
+                  >
+                </button>
+                <button
+                  onclick="changePrayer('Ashar', '14:55')"
+                  class="prayer-btn bg-gray-800/80 border border-gray-700 text-gray-300 p-2 rounded-xl text-center text-xs font-medium hover:bg-emerald-800 transition"
+                >
+                  Ashar<br /><span class="text-[10px] text-amber-300"
+                    >14:55</span
+                  >
+                </button>
+                <button
+                  onclick="changePrayer('Maghrib', '17:48')"
+                  class="prayer-btn bg-gray-800/80 border border-gray-700 text-gray-300 p-2 rounded-xl text-center text-xs font-medium hover:bg-emerald-800 transition"
+                >
+                  Maghrib<br /><span class="text-[10px] text-amber-300"
+                    >17:48</span
+                  >
+                </button>
+                <button
+                  onclick="changePrayer('Isya', '18:58')"
+                  class="prayer-btn bg-gray-800/80 border border-gray-700 text-gray-300 p-2 rounded-xl text-center text-xs font-medium hover:bg-emerald-800 transition"
+                >
+                  Isya<br /><span class="text-[10px] text-amber-300"
+                    >18:58</span
+                  >
+                </button>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="#"
+                onclick="
+                  trackDownload();
+                  return false;
+                "
+                class="w-full sm:w-auto px-6 py-3.5 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 group"
+              >
+                <i
+                  data-lucide="download"
+                  class="w-5 h-5 group-hover:translate-y-0.5 transition"
+                ></i>
+                Unduh APK (azanku.apk)
+              </a>
+              <a
+                href="#panduan"
+                class="w-full sm:w-auto px-5 py-3.5 bg-gray-800 hover:bg-gray-700 text-gray-200 font-medium rounded-xl transition border border-gray-700 flex items-center justify-center gap-2 text-sm"
+              >
+                <i data-lucide="help-circle" class="w-4 h-4 text-amber-400"></i>
+                Cara Pasang APK
+              </a>
+            </div>
+          </div>
+          <div class="lg:col-span-5 flex justify-center py-4">
+            <div
+              class="animate-float-slow w-60 sm:w-64 h-[470px] bg-gray-900 rounded-[2.5rem] p-3 border-4 border-gray-700 shadow-2xl relative shadow-amber-500/10"
+            >
+              <div class="w-20 h-4 bg-gray-800 rounded-b-xl mx-auto mb-2"></div>
+              <div
+                class="w-full h-[410px] bg-emeraldDeep rounded-[1.8rem] p-4 text-center text-white flex flex-col justify-between border border-emerald-500/30"
+              >
+                <div>
+                  <div
+                    class="text-[10px] text-amber-300 font-mono tracking-widest uppercase"
+                  >
+                    AzanKu Mobile
+                  </div>
+                  <div
+                    id="display-prayer-name"
+                    class="text-2xl font-bold mt-2 font-serif text-white"
+                  >
+                    Subuh
+                  </div>
+                  <div
+                    id="display-prayer-time"
+                    class="text-xs text-emerald-300 font-mono"
+                  >
+                    04:28 WIB • GPS Active
+                  </div>
+                </div>
+                <div
+                  class="my-auto py-5 bg-emeraldLight/40 rounded-2xl border border-emerald-500/30 relative overflow-hidden"
+                >
+                  <div class="text-[11px] text-gray-300">
+                    Menuju Waktu Shalat
+                  </div>
+                  <div
+                    id="countdown-timer"
+                    class="text-2xl font-mono font-bold text-amber-400 my-1 tracking-wider"
+                  >
+                    03:14:20
+                  </div>
+                  <div class="text-[10px] text-emerald-200">
+                    Auto Alarm & Pre-Azan 10 Mnt
+                  </div>
+                </div>
+                <div class="text-[11px] text-gray-400 italic font-serif">
+                  "Semoga Bermanfaat"
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTOFOLIO GRID -->
+      <section id="karya" class="mb-24 sm:mb-32">
+        <div class="mb-10">
+          <h3 class="text-2xl sm:text-3xl font-bold text-white mb-2">
+            Ekosistem Inovasi DudiTechno
+          </h3>
+          <p class="text-gray-400 text-sm">
+            Rangkaian solusi teknologi independen untuk institusi, pendidikan,
+            dan efisiensi kerja.
+          </p>
+        </div>
+        <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Kartu otomatis dari Admin -->
+        </div>
+      </section>
+
+      <!-- REKAM JEJAK & PROYEK (TABEL DINAMIS) -->
+      <section id="timeline" class="mb-24 sm:mb-32">
+        <h3
+          class="text-xl sm:text-2xl font-bold text-white mb-6 flex items-center gap-2"
+        >
+          <i data-lucide="history" class="w-5 h-5 text-amber-400"></i>
+          Rekam Jejak & Proyek
+        </h3>
+
+        <div
+          class="glass-card rounded-2xl overflow-x-auto border border-gray-800"
+        >
+          <table
+            class="w-full text-left text-xs sm:text-sm text-gray-300 min-w-[500px]"
+          >
+            <thead
+              class="bg-gray-900/90 text-amber-400 font-mono text-[11px] uppercase tracking-wider border-b border-gray-800"
+            >
+              <tr>
+                <th class="p-4">Nama Proyek</th>
+                <th class="p-4">Kategori Spesifikasi</th>
+                <th class="p-4">Status Rilis</th>
+              </tr>
+            </thead>
+            <tbody id="timeline-body" class="divide-y divide-gray-800/60">
+              <!-- Tabel baris otomatis dari Admin -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PANDUAN INSTALLATION -->
+      <section id="panduan" class="mb-24 sm:mb-32">
+        <div
+          class="glass-card rounded-3xl p-6 sm:p-10 border border-emerald-500/30 relative overflow-hidden"
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <div
+              class="w-10 h-10 rounded-xl bg-emerald-900/60 border border-emerald-500/40 flex items-center justify-center text-emerald-400"
+            >
+              <i data-lucide="shield-check" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold text-white">
+                Panduan Pemasangan APK
+              </h3>
+              <p class="text-xs text-gray-400">
+                Langkah aman meng-install aplikasi AzanKu di HP Android Anda
+              </p>
+            </div>
+          </div>
+          <p class="text-gray-300 text-sm mb-6 leading-relaxed">
+            Karena disebarkan secara independen (<i>Sideloading</i>), sistem
+            Android mungkin akan menampilkan pesan konfirmasi keamanan. Ini
+            adalah prosedur standar. Ikuti 3 langkah berikut:
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="bg-gray-900/80 p-5 rounded-2xl border border-gray-800">
+              <div class="text-amber-400 font-mono text-xs font-bold mb-2">
+                01. UNDUH FILE
+              </div>
+              <div class="text-white text-sm font-semibold mb-1">
+                Klik Unduh APK
+              </div>
+              <div class="text-gray-400 text-xs leading-relaxed">
+                Simpan file azanku.apk ke folder unduhan HP Anda.
+              </div>
+            </div>
+            <div class="bg-gray-900/80 p-5 rounded-2xl border border-gray-800">
+              <div class="text-amber-400 font-mono text-xs font-bold mb-2">
+                02. BUKA PERINGATAN
+              </div>
+              <div class="text-white text-sm font-semibold mb-1">
+                Detail Selengkapnya
+              </div>
+              <div class="text-gray-400 text-xs leading-relaxed">
+                Jika muncul Google Play Protect, tekan tulisan "Detail
+                Selengkapnya".
+              </div>
+            </div>
+            <div class="bg-gray-900/80 p-5 rounded-2xl border border-gray-800">
+              <div class="text-amber-400 font-mono text-xs font-bold mb-2">
+                03. TETAP INSTALL
+              </div>
+              <div class="text-white text-sm font-semibold mb-1">
+                Selesaikan Pemasangan
+              </div>
+              <div class="text-gray-400 text-xs leading-relaxed">
+                Pilih "Tetap Install" (Install Anyway). Aplikasi siap digunakan!
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFAQ & DUKUNGAN -->
+      <section id="infaq" class="mb-24 sm:mb-32">
+        <div
+          class="glass-card rounded-3xl p-8 sm:p-10 text-center max-w-3xl mx-auto border border-emerald-500/20"
+        >
+          <div
+            class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4 mx-auto"
+          >
+            <i data-lucide="hand-heart" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-2">Infaq & Dukungan</h3>
+          <p class="text-gray-400 text-sm mb-6">
+            Dukungan Anda membantu pengembangan aplikasi islami gratis.
+          </p>
+          <div
+            class="bg-gray-900/80 p-5 rounded-2xl border border-gray-800 inline-block"
+          >
+            <p class="text-xs text-gray-400 mb-1">Bank Jago</p>
+            <div class="flex items-center gap-4 justify-center">
+              <span
+                id="rek-number"
+                class="text-xl font-mono font-bold text-amber-400 tracking-widest"
+                >102942763614</span
+              >
+              <button
+                onclick="copyRek()"
+                class="px-3 py-2 bg-amber-500 text-gray-950 rounded-lg font-bold text-xs hover:bg-amber-400 flex items-center gap-1"
+              >
+                <i data-lucide="copy" class="w-3 h-3"></i> Salin
+              </button>
+            </div>
+            <p class="text-[10px] text-gray-500 mt-2">a.n. Dudi Imadudin</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FORMULIR KIRIM PESAN -->
+      <section id="kontak" class="mb-24 sm:mb-32">
+        <div
+          class="glass-card rounded-3xl p-8 sm:p-10 max-w-2xl mx-auto border border-gray-800"
+        >
+          <div class="flex items-center gap-3 mb-6">
+            <div
+              class="w-10 h-10 rounded-xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400"
+            >
+              <i data-lucide="mail" class="w-5 h-5"></i>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-bold text-white">
+              Kirim Pesan
+            </h3>
+          </div>
+          <form
+            data-netlify="true"
+            name="kontak"
+            method="POST"
+            class="space-y-4"
+          >
+            <input type="hidden" name="form-name" value="kontak" />
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Nama</label>
+              <input
+                type="text"
+                name="nama"
+                required
+                class="w-full bg-gray-900/80 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1"
+                >Email (Opsional)</label
+              >
+              <input
+                type="email"
+                name="email"
+                class="w-full bg-gray-900/80 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500"
+              />
+            </div>
+            <div>
+              <label class="block text-xs text-gray-400 mb-1">Pesan</label>
+              <textarea
+                name="pesan"
+                rows="4"
+                required
+                class="w-full bg-gray-900/80 border border-gray-800 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500"
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold rounded-xl transition flex items-center justify-center gap-2"
+            >
+              <i data-lucide="send" class="w-4 h-4"></i> Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer
+        class="text-center text-gray-500 text-xs space-y-3 border-t border-gray-800/80 pt-8 pb-12"
+      >
+        <p>
+          © 2026 Dudi Imadudin —
+          <strong class="text-gray-300">DudiTechno</strong>. Hak Cipta
+          Dilindungi.
+        </p>
+        <p class="text-amber-400/90 italic font-serif text-sm">
+          "Semoga bermanfaat untuk kemaslahatan bersama."
+        </p>
+      </footer>
+    </main>
+
+    <!-- FLOATING PILL NAVIGATION -->
+    <div
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-auto max-w-[95vw]"
+    >
+      <nav
+        class="glass-pill px-4 sm:px-6 py-3 rounded-full flex items-center justify-center gap-4 sm:gap-6 shadow-2xl text-xs font-medium text-gray-300 border border-amber-500/30"
+      >
+        <a
+          href="#"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="home" class="w-4 h-4"></i
+          ><span class="hidden sm:inline">Beranda</span></a
+        >
+        <a
+          href="#azanku"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="smartphone" class="w-4 h-4"></i
+          ><span>AzanKu</span></a
+        >
+        <a
+          href="#karya"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="folder-kanban" class="w-4 h-4"></i
+          ><span class="hidden sm:inline">Karya</span></a
+        >
+        <a
+          href="#timeline"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="history" class="w-4 h-4"></i
+          ><span class="hidden sm:inline">Jejak</span></a
+        >
+        <a
+          href="#panduan"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="help-circle" class="w-4 h-4"></i
+          ><span>Panduan</span></a
+        >
+        <a
+          href="#infaq"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="hand-heart" class="w-4 h-4"></i><span>Infaq</span></a
+        >
+        <a
+          href="#kontak"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+          ><i data-lucide="mail" class="w-4 h-4"></i><span>Kontak</span></a
+        >
+      </nav>
+    </div>
+
+    <!-- MODAL DONASI (POP-UP UNDUH) -->
+    <div
+      id="donationModal"
+      class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+    >
+      <div
+        class="glass-card rounded-3xl max-w-md w-full p-6 sm:p-8 relative border border-amber-500/30"
+      >
+        <button
+          onclick="closeDonationModal()"
+          class="absolute top-4 right-4 text-gray-400 hover:text-white"
+        >
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <div class="text-center mb-6">
+          <div
+            class="w-12 h-12 rounded-2xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4 mx-auto"
+          >
+            <i data-lucide="heart-handshake" class="w-6 h-6"></i>
+          </div>
+          <h3 class="text-2xl font-serif text-white mb-2">
+            Dukung Pengembangan
+          </h3>
+          <p class="text-gray-400 text-sm">
+            Seluruh aplikasi dalam web ini gratis & open-source. Dukungan Anda
+            sangat berarti untuk keberlangsungan pengembangan-- JAZAKALLAH
+            KHAIRON KATSIRO.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6 items-center">
+          <!-- QRIS Image -->
+          <!--
+          <div class="text-center order-2 sm:order-1">
+            <img
+              src="https://i.imgur.com/0chokTN.png"
+              alt="QRIS DudiTechno"
+              class="w-full h-auto rounded-xl mb-2 border border-gray-700"
+              onerror="
+                this.onerror = null;
+                this.src =
+                  'https://via.placeholder.com/250x250/042018/f59e0b?text=QRIS+Error';
+              "
+            />
+            <p class="text-xs text-amber-400 font-mono">Scan via QRIS GOPAY</p>
+          </div> -->
+          <!-- Bank Account -->
+          <div class="text-center sm:text-left order-1 sm:order-2">
+            <p class="text-xs text-gray-400 mb-1">Bank Jago</p>
+            <div
+              class="flex items-center gap-2 justify-center sm:justify-start mb-4"
+            >
+              <span
+                class="text-sm font-mono font-bold text-white tracking-widest"
+                >102942763614</span
+              >
+              <button
+                onclick="copyJago()"
+                class="text-amber-400 p-1 hover:text-amber-300"
+              >
+                <i data-lucide="copy" class="w-4 h-4"></i>
+              </button>
+            </div>
+            <p class="text-xs text-gray-500">a.n. Dudi Imadudin</p>
+          </div>
+        </div>
+
+        <a
+          id="confirmDownloadBtn"
+          href="#"
+          download
+          class="w-full py-3 bg-amber-500 hover:bg-amber-400 text-gray-950 font-bold rounded-xl transition flex items-center justify-center gap-2"
+        >
+          <i data-lucide="download" class="w-5 h-5"></i> Lanjutkan Unduhan
+        </a>
+      </div>
+    </div>
+
+    <!-- Toast Notif -->
+    <div id="toast" class="toast">Nomor rekening berhasil disalin!</div>
+
+    <script>
+      lucide.createIcons();
+
+      // Simulator Jam Shalat
+      function changePrayer(name, time) {
+        document.getElementById("display-prayer-name").innerText = name;
+        document.getElementById("display-prayer-time").innerText =
+          time + " WIB • GPS Active";
+        const buttons = document.querySelectorAll(".prayer-btn");
+        buttons.forEach((btn) => {
+          btn.classList.remove(
+            "bg-emerald-900/60",
+            "border-emerald-500/50",
+            "text-white",
+          );
+          btn.classList.add(
+            "bg-gray-800/80",
+            "border-gray-700",
+            "text-gray-300",
+          );
+        });
+        event.currentTarget.classList.remove(
+          "bg-gray-800/80",
+          "border-gray-700",
+          "text-gray-300",
+        );
+        event.currentTarget.classList.add(
+          "bg-emerald-900/60",
+          "border-emerald-500/50",
+          "text-white",
+        );
+      }
+
+      // Animated Countdown Simulator
+      let seconds = 11660;
+      setInterval(() => {
+        seconds--;
+        if (seconds < 0) seconds = 11660;
+        const hrs = String(Math.floor(seconds / 3600)).padStart(2, "0");
+        const mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+        const secs = String(seconds % 60).padStart(2, "0");
+        document.getElementById("countdown-timer").innerText =
+          `${hrs}:${mins}:${secs}`;
+      }, 1000);
+
+      // Copy Rekening BSI
+      function copyRek() {
+        const text = document.getElementById("rek-number").innerText;
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById("toast");
+          toast.innerText = "Nomor rekening BSI berhasil disalin!";
+          toast.className = "toast show";
+          setTimeout(() => {
+            toast.className = toast.className.replace("show", "");
+          }, 3000);
+        });
+      }
+
+      // Copy Rekening Jago
+      function copyJago() {
+        const text = "102942763614";
+        navigator.clipboard.writeText(text).then(() => {
+          const toast = document.getElementById("toast");
+          toast.innerText = "Nomor rekening Jago berhasil disalin!";
+          toast.className = "toast show";
+          setTimeout(() => {
+            toast.className = toast.className.replace("show", "");
+          }, 3000);
+        });
+      }
+
+      // Tracker Pengunjung & Unduhan
+      fetch("https://api.counterapi.dev/v1/duditechno/visits/up").catch(
+        () => {},
+      );
+      function trackDownload() {
+        // 1. Catat angka unduhan ke laporan Admin
+        fetch("https://api.counterapi.dev/v1/duditechno/downloads/up").catch(
+          () => {},
+        );
+
+        // 2. Ganti teks GANTI_DENGAN_ID_FILE_AZANKU dengan ID file Google Drive Anda
+        var linkAzanku =
+          "https://drive.google.com/uc?export=download&id=1_BkHINQ9dohgI4WGGH9CzJwDKxv9FoCX";
+
+        // 3. Tampilkan Pop-up Donasi (sama seperti di kartu portofolio)
+        openDonationModal(linkAzanku);
+      }
+
+      // =====================================================
+      // FUNGSI CONVERT GOOGLE DRIVE
+      // =====================================================
+      function getGoogleDriveImage(url) {
+        if (!url || url === "")
+          return "https://via.placeholder.com/600x300/042018/f59e0b?text=DudiTechno";
+        const regex1 = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+        const regex2 = /[?&]id=([a-zA-Z0-9_-]+)/;
+        let match = url.match(regex1) || url.match(regex2);
+        if (match && match[1]) {
+          let fileId = match[1];
+          return `https://lh3.googleusercontent.com/d/${fileId}=w1000-h500-p-k`;
+        }
+        return url;
+      }
+
+      function getGoogleDriveDownloadLink(url) {
+        if (!url || url === "") return "#";
+        const regex1 = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+        const regex2 = /[?&]id=([a-zA-Z0-9_-]+)/;
+        let match = url.match(regex1) || url.match(regex2);
+        if (match && match[1]) {
+          let fileId = match[1];
+          return `https://drive.google.com/uc?export=download&id=${fileId}`;
+        }
+        return url;
+      }
+
+      // =====================================================
+      // FUNGSI MODAL DONASI
+      // =====================================================
+      function openDonationModal(downloadLink) {
+        // Set link asli ke tombol di dalam modal
+        document.getElementById("confirmDownloadBtn").href = downloadLink;
+        // Tampilkan modal
+        const modal = document.getElementById("donationModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeDonationModal() {
+        const modal = document.getElementById("donationModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      // =====================================================
+      // FUNGSI MERENDER KARYA DARI ADMIN (LOCALSTORAGE)
+      // =====================================================
+      function renderPortfolio() {
+        const defaultApps = [
+          {
+            id: 1,
+            name: "Custom LMS Platform",
+            version: "v1.0",
+            category: "Google Apps Script • Web",
+            desc: "Sistem manajemen pembelajaran kustom terintegrasi Google Apps Script dengan timer ujian otomatis dan modul anti-kecurangan.",
+            status: "Publish",
+            link: "#",
+          },
+          {
+            id: 2,
+            name: "Database Migration Engine",
+            version: "v1.0",
+            category: "Data Engineering • Server",
+            desc: "Solusi optimasi migrasi server dan enkoding karakter untuk memastikan integritas data pengguna tanpa ada yang korup.",
+            status: "Publish",
+            link: "#",
+          },
+          {
+            id: 3,
+            name: "ARKAS Budget Classifier",
+            version: "v1.0",
+            category: "Automation • Institutional",
+            desc: "Alat bantu otomatisasi perhitungan volume barang dan pengelompokan kategori anggaran lembaga pendidikan.",
+            status: "Publish",
+            link: "#",
+          },
+        ];
+
+        let apps = JSON.parse(localStorage.getItem("dudi_apps"));
+        if (!apps) {
+          localStorage.setItem("dudi_apps", JSON.stringify(defaultApps));
+          apps = defaultApps;
+        }
+
+        let publishedApps = apps.filter((app) => app.status === "Publish");
+
+        // Render Kartu Portofolio
+        const grid = document.getElementById("portfolio-grid");
+        grid.innerHTML = publishedApps
+          .map((app) => {
+            let imageHtml = app.image
+              ? `<img src="${getGoogleDriveImage(app.image)}" alt="${app.name}" class="w-full h-40 object-cover rounded-2xl mb-4" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x300/042018/f59e0b?text=Gambar+Error';">`
+              : `<div class="w-12 h-12 rounded-2xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-6"><i data-lucide="package" class="w-6 h-6"></i></div>`;
+
+            // Tombol Unduh sekarang memanggil Modal Donasi
+            let linkHtml =
+              app.link && app.link !== "#"
+                ? `<button onclick="openDonationModal('${getGoogleDriveDownloadLink(app.link)}')" class="mt-4 block text-center py-2 bg-emerald-800/50 text-amber-400 border border-amber-500/30 rounded-lg font-bold text-sm hover:bg-amber-500 hover:text-emerald-deep transition flex items-center justify-center gap-2 w-full">
+                        <i data-lucide="download" class="w-4 h-4"></i> Unduh / Lihat
+                    </button>`
+                : "";
+
+            return `
+                    <div class="interactive-card glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                        <div>
+                            ${imageHtml}
+                            <h4 class="text-xl font-bold text-white mb-3">${app.name}</h4>
+                            <p class="text-gray-300 text-sm leading-relaxed mb-6">${app.desc}</p>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-amber-400 bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-500/20 w-fit">${app.category || "Karya"}</span>
+                            ${linkHtml}
+                        </div>
+                    </div>
+                `;
+          })
+          .join("");
+
+        lucide.createIcons();
+
+        // Render Tabel Rekam Jejak
+        const timelineBody = document.getElementById("timeline-body");
+        timelineBody.innerHTML = publishedApps
+          .map(
+            (app) => `
+                <tr class="hover:bg-gray-800/40 transition">
+                    <td class="p-4 font-semibold text-white flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        ${app.name}
+                    </td>
+                    <td class="p-4 text-gray-400">${app.category || "Karya"}</td>
+                    <td class="p-4"><span class="text-emerald-400 text-xs bg-emerald-950/80 border border-emerald-500/30 px-2.5 py-1 rounded-full">Rilis ${app.version || "v1.0"}</span></td>
+                </tr>
+            `,
+          )
+          .join("");
+      }
+
+      renderPortfolio();
+      window.addEventListener("storage", renderPortfolio);
+    </script>
+  </body>
+</html>
