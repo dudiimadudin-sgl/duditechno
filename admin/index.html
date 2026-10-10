@@ -50,9 +50,14 @@
                 <h1 class="text-3xl font-serif text-white">Dashboard Admin</h1>
                 <p class="text-gray-500">Kelola Publikasi Aplikasi (Cloud Database)</p>
             </div>
-            <a href="../index.html" target="_blank" class="text-sm px-4 py-2 border border-gray-600 rounded-lg hover:bg-white/10 flex items-center gap-2">
-                <i data-lucide="external-link" class="w-4 h-4"></i> Lihat Web
-            </a>
+            <div class="flex gap-3">
+                <button onclick="logout()" class="text-sm px-4 py-2 bg-red-900/50 border border-red-500/30 text-red-400 rounded-lg hover:bg-red-900 flex items-center gap-2">
+                    <i data-lucide="log-out" class="w-4 h-4"></i> Logout
+                </button>
+                <a href="../index.html" target="_blank" class="text-sm px-4 py-2 border border-gray-600 rounded-lg hover:bg-white/10 flex items-center gap-2">
+                    <i data-lucide="external-link" class="w-4 h-4"></i> Lihat Web
+                </a>
+            </div>
         </header>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
@@ -161,6 +166,11 @@
             } else {
                 alert("Password salah! Akses ditolak.");
             }
+        }
+        function logout() {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('loginGate').classList.remove('hidden');
+            document.getElementById('passInput').value = ''; // Mengosongkan kolom password
         }
 
         function fetchAnalytics() {
