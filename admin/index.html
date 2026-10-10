@@ -150,10 +150,17 @@
         lucide.createIcons();
 
         function login() {
-            document.getElementById('loginGate').classList.add('hidden');
-            document.getElementById('dashboard').classList.remove('hidden');
-            renderList();
-            fetchAnalytics(); 
+            const password = document.getElementById('passInput').value;
+            const correctPassword = "Saguling1@";
+            
+            if (password === correctPassword) {
+                document.getElementById('loginGate').classList.add('hidden');
+                document.getElementById('dashboard').classList.remove('hidden');
+                renderList();
+                fetchAnalytics(); 
+            } else {
+                alert("Password salah! Akses ditolak.");
+            }
         }
 
         function fetchAnalytics() {
