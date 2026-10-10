@@ -1,407 +1,224 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - DudiTechno</title>
     <link rel="icon" type="image/png" href="https://i.imgur.com/CWm8ZVq.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              "deep-dark": "#030712",
-              glass: "rgba(17, 24, 39, 0.65)",
-              "emerald-deep": "#042018",
-              gold: "#f59e0b",
-            },
-            fontFamily: {
-              serif: ['"Playfair Display"', "serif"],
-              sans: ['"Plus Jakarta Sans"', "sans-serif"],
-            },
-          },
-        },
-      };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-dark': '#030712',
+                        'glass': 'rgba(17, 24, 39, 0.65)',
+                        'emerald-deep': '#042018',
+                        'gold': '#f59e0b',
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
     </script>
     <style>
-      body {
-        background-color: #030712;
-      }
-      .glass-card {
-        background: rgba(17, 24, 39, 0.65);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
+        body { background-color: #030712; }
+        .glass-card { background: rgba(17, 24, 39, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
     </style>
-  </head>
-  <body
-    class="font-sans text-gray-300 min-h-screen flex items-center justify-center p-4"
-  >
-    <!-- Login Gate -->
-    <div
-      id="loginGate"
-      class="glass-card p-8 rounded-2xl max-w-md w-full text-center"
-    >
-      <h1 class="text-2xl font-serif text-white mb-2">DudiTechno Admin</h1>
-      <p class="text-gray-400 mb-6">Silakan login untuk melanjutkan</p>
-      <input
-        type="password"
-        id="passInput"
-        placeholder="Masukkan Password"
-        class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white text-center focus:outline-none focus:border-gold mb-4"
-      />
-      <button
-        onclick="login()"
-        class="w-full py-3 bg-gold text-emerald-deep font-bold rounded-lg hover:bg-amber-400"
-      >
-        Login
-      </button>
-      <p class="text-xs text-gray-500 mt-4">
-        (Demo: Biarkan kosong, langsung klik Login)
-      </p>
+</head>
+<body class="font-sans text-gray-300 min-h-screen flex items-center justify-center p-4">
+
+    <div id="loginGate" class="glass-card p-8 rounded-2xl max-w-md w-full text-center">
+        <h1 class="text-2xl font-serif text-white mb-2">DudiTechno Admin</h1>
+        <p class="text-gray-400 mb-6">Silakan login untuk melanjutkan</p>
+        <input type="password" id="passInput" placeholder="Masukkan Password" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white text-center focus:outline-none focus:border-gold mb-4">
+        <button onclick="login()" class="w-full py-3 bg-gold text-emerald-deep font-bold rounded-lg hover:bg-amber-400">Login</button>
+        <p class="text-xs text-gray-500 mt-4">(Demo: Biarkan kosong, langsung klik Login)</p>
     </div>
 
-    <!-- Dashboard Content -->
     <div id="dashboard" class="hidden w-full max-w-5xl">
-      <header class="flex justify-between items-center mb-8">
-        <div>
-          <h1 class="text-3xl font-serif text-white">Dashboard Admin</h1>
-          <p class="text-gray-500">Kelola Publikasi Aplikasi</p>
-        </div>
-        <a
-          href="../index.html"
-          target="_blank"
-          class="text-sm px-4 py-2 border border-gray-600 rounded-lg hover:bg-white/10 flex items-center gap-2"
-        >
-          <i data-lucide="external-link" class="w-4 h-4"></i> Lihat Web
-        </a>
-      </header>
+        
+        <header class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-serif text-white">Dashboard Admin</h1>
+                <p class="text-gray-500">Kelola Publikasi Aplikasi (Cloud Database)</p>
+            </div>
+            <a href="../index.html" target="_blank" class="text-sm px-4 py-2 border border-gray-600 rounded-lg hover:bg-white/10 flex items-center gap-2">
+                <i data-lucide="external-link" class="w-4 h-4"></i> Lihat Web
+            </a>
+        </header>
 
-      <!-- BAGIAN LAPORAN ANALYTICS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-        <div
-          class="glass-card p-6 rounded-2xl flex items-center gap-4 border border-emerald-500/20"
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400"
-          >
-            <i data-lucide="users" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <p class="text-sm text-gray-400">Total Pengunjung Web</p>
-            <h3 id="visitorCount" class="text-2xl font-bold text-white">
-              Loading...
-            </h3>
-          </div>
-        </div>
-        <div
-          class="glass-card p-6 rounded-2xl flex items-center gap-4 border border-amber-500/20"
-        >
-          <div
-            class="w-12 h-12 rounded-xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400"
-          >
-            <i data-lucide="download" class="w-6 h-6"></i>
-          </div>
-          <div>
-            <p class="text-sm text-gray-400">Total Unduhan AzanKu</p>
-            <h3 id="downloadCount" class="text-2xl font-bold text-white">
-              Loading...
-            </h3>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid lg:grid-cols-2 gap-8">
-        <!-- Form Input -->
-        <div class="glass-card p-6 rounded-2xl">
-          <h2 class="text-xl font-bold text-white mb-4">
-            Form Publikasi Aplikasi
-          </h2>
-          <form id="appForm" class="space-y-4">
-            <input type="hidden" id="editId" value="" />
-
-            <div>
-              <label class="block text-sm mb-1">Nama Aplikasi</label>
-              <input
-                type="text"
-                id="appName"
-                required
-                class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-              />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+            <div class="glass-card p-6 rounded-2xl flex items-center gap-4 border border-emerald-500/20">
+                <div class="w-12 h-12 rounded-xl bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <i data-lucide="users" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-400">Total Pengunjung Web</p>
+                    <h3 id="visitorCount" class="text-2xl font-bold text-white">Loading...</h3>
+                </div>
             </div>
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm mb-1">Versi</label>
-                <input
-                  type="text"
-                  id="appVersion"
-                  placeholder="v1.0"
-                  class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-                />
-              </div>
-              <div>
-                <label class="block text-sm mb-1">Kategori</label>
-                <input
-                  type="text"
-                  id="appCategory"
-                  placeholder="Contoh: Web PHP • Server"
-                  class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-                />
-              </div>
+            <div class="glass-card p-6 rounded-2xl flex items-center gap-4 border border-amber-500/20">
+                <div class="w-12 h-12 rounded-xl bg-amber-950 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                    <i data-lucide="download" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-400">Total Unduhan AzanKu</p>
+                    <h3 id="downloadCount" class="text-2xl font-bold text-white">Loading...</h3>
+                </div>
             </div>
-            <div>
-              <label class="block text-sm mb-1"
-                >Link Unduh (Google Drive)</label
-              >
-              <input
-                type="url"
-                id="appLink"
-                placeholder="https://drive.google.com/file/d/..."
-                class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-              />
-            </div>
-            <div>
-              <label class="block text-sm mb-1">Deskripsi Singkat</label>
-              <textarea
-                id="appDesc"
-                rows="2"
-                class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-              ></textarea>
-            </div>
-            <div>
-              <label class="block text-sm mb-1"
-                >Fitur Utama (Pisahkan koma)</label
-              >
-              <input
-                type="text"
-                id="appFeatures"
-                placeholder="Bebas Iklan, GPS Presisi"
-                class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-              />
-            </div>
-            <div>
-              <label class="block text-sm mb-1"
-                >URL Gambar (Saran: Pakai Link Imgur.com)</label
-              >
-              <input
-                type="text"
-                id="appImage"
-                placeholder="Paste link gambar di sini"
-                class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"
-              />
-            </div>
-            <div>
-              <label class="block text-sm mb-1">Status Publikasi</label>
-              <div class="flex gap-4 mt-2">
-                <label class="flex items-center gap-2"
-                  ><input
-                    type="radio"
-                    name="status"
-                    value="Publish"
-                    checked
-                    class="text-gold"
-                  />
-                  Publish</label
-                >
-                <label class="flex items-center gap-2"
-                  ><input
-                    type="radio"
-                    name="status"
-                    value="Draft"
-                    class="text-gold"
-                  />
-                  Draft</label
-                >
-              </div>
-            </div>
-            <button
-              type="submit"
-              id="submitBtn"
-              class="w-full py-3 bg-gold text-emerald-deep font-bold rounded-lg hover:bg-amber-400 flex items-center justify-center gap-2"
-            >
-              <i data-lucide="rocket" class="w-5 h-5"></i>
-              <span id="submitText">Publish Aplikasi</span>
-            </button>
-            <button
-              type="button"
-              onclick="resetForm()"
-              class="hidden w-full py-2 mt-2 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600"
-              id="cancelBtn"
-            >
-              Batal Edit
-            </button>
-          </form>
         </div>
 
-        <!-- Live Preview & List -->
-        <div class="space-y-8">
-          <div class="glass-card p-6 rounded-2xl">
-            <h2 class="text-xl font-bold text-white mb-4">Live Preview</h2>
-            <div
-              class="interactive-card glass-card rounded-3xl p-6 flex flex-col"
-            >
-              <img
-                id="prevImg"
-                src="https://via.placeholder.com/600x300/042018/f59e0b?text=DudiTechno"
-                alt="Preview"
-                class="w-full h-40 object-cover rounded-2xl mb-4"
-                onerror="
-                  this.onerror = null;
-                  this.src =
-                    'https://via.placeholder.com/600x300/042018/f59e0b?text=Gambar+Error';
-                "
-              />
-              <span
-                id="prevCat"
-                class="text-xs font-mono text-amber-400 bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-500/20 w-fit mb-2"
-                >Kategori</span
-              >
-              <h3 id="prevName" class="font-bold text-white text-lg">
-                Nama Aplikasi
-              </h3>
-              <p id="prevVer" class="text-xs text-gray-500 mb-2">Versi: v1.0</p>
-              <p id="prevDesc" class="text-sm text-gray-400">
-                Deskripsi akan muncul di sini...
-              </p>
+        <div class="grid lg:grid-cols-2 gap-8">
+            <div class="glass-card p-6 rounded-2xl">
+                <h2 class="text-xl font-bold text-white mb-4">Form Publikasi Aplikasi</h2>
+                <form id="appForm" class="space-y-4">
+                    <input type="hidden" id="editId" value="">
+                    
+                    <div>
+                        <label class="block text-sm mb-1">Nama Aplikasi</label>
+                        <input type="text" id="appName" required class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm mb-1">Versi</label>
+                            <input type="text" id="appVersion" placeholder="v1.0" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                        </div>
+                        <div>
+                            <label class="block text-sm mb-1">Kategori</label>
+                            <input type="text" id="appCategory" placeholder="Contoh: Web PHP • Server" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Link Unduh (Google Drive)</label>
+                        <input type="url" id="appLink" placeholder="https://drive.google.com/file/d/..." class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Deskripsi Singkat</label>
+                        <textarea id="appDesc" rows="2" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold"></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Fitur Utama (Pisahkan koma)</label>
+                        <input type="text" id="appFeatures" placeholder="Bebas Iklan, GPS Presisi" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">URL Gambar (Saran: Pakai Link Imgur.com)</label>
+                        <input type="text" id="appImage" placeholder="Paste link gambar di sini" class="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-gold">
+                    </div>
+                    <div>
+                        <label class="block text-sm mb-1">Status Publikasi</label>
+                        <div class="flex gap-4 mt-2">
+                            <label class="flex items-center gap-2"><input type="radio" name="status" value="Publish" checked class="text-gold"> Publish</label>
+                            <label class="flex items-center gap-2"><input type="radio" name="status" value="Draft" class="text-gold"> Draft</label>
+                        </div>
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full py-3 bg-gold text-emerald-deep font-bold rounded-lg hover:bg-amber-400 flex items-center justify-center gap-2">
+                        <i data-lucide="rocket" class="w-5 h-5"></i> <span id="submitText">Publish Aplikasi</span>
+                    </button>
+                    <button type="button" onclick="resetForm()" class="hidden w-full py-2 mt-2 bg-gray-700 text-white font-bold rounded-lg hover:bg-gray-600" id="cancelBtn">Batal Edit</button>
+                </form>
             </div>
-          </div>
 
-          <div class="glass-card p-6 rounded-2xl">
-            <h2 class="text-xl font-bold text-white mb-4">Daftar Aplikasi</h2>
-            <div id="appList" class="space-y-3 max-h-96 overflow-y-auto pr-2">
-              <!-- List dari JS -->
+            <div class="space-y-8">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold text-white mb-4">Live Preview</h2>
+                    <div class="interactive-card glass-card rounded-3xl p-6 flex flex-col">
+                        <img id="prevImg" src="https://via.placeholder.com/600x300/042018/f59e0b?text=DudiTechno" alt="Preview" class="w-full h-40 object-cover rounded-2xl mb-4" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x300/042018/f59e0b?text=Gambar+Error';">
+                        <span id="prevCat" class="text-xs font-mono text-amber-400 bg-amber-950/40 px-3 py-1.5 rounded-xl border border-amber-500/20 w-fit mb-2">Kategori</span>
+                        <h3 id="prevName" class="font-bold text-white text-lg">Nama Aplikasi</h3>
+                        <p id="prevVer" class="text-xs text-gray-500 mb-2">Versi: v1.0</p>
+                        <p id="prevDesc" class="text-sm text-gray-400">Deskripsi akan muncul di sini...</p>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl">
+                    <h2 class="text-xl font-bold text-white mb-4">Daftar Aplikasi</h2>
+                    <div id="appList" class="space-y-3 max-h-96 overflow-y-auto pr-2"></div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <script>
-      lucide.createIcons();
+        lucide.createIcons();
 
-      function login() {
-        document.getElementById("loginGate").classList.add("hidden");
-        document.getElementById("dashboard").classList.remove("hidden");
-        renderList();
-        fetchAnalytics();
-      }
-
-      // Fetch Analytics API
-      function fetchAnalytics() {
-        fetch("https://api.counterapi.dev/v1/duditechno/visits")
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById("visitorCount").innerText = data.count || 0;
-          })
-          .catch(
-            () => (document.getElementById("visitorCount").innerText = "Error"),
-          );
-
-        fetch("https://api.counterapi.dev/v1/duditechno/downloads")
-          .then((res) => res.json())
-          .then((data) => {
-            document.getElementById("downloadCount").innerText =
-              data.count || 0;
-          })
-          .catch(
-            () =>
-              (document.getElementById("downloadCount").innerText = "Error"),
-          );
-      }
-
-      // Live Preview Form
-      const form = document.getElementById("appForm");
-      form.addEventListener("input", updatePreview);
-      form.addEventListener("submit", saveApp);
-
-      // Fungsi Converter Google Drive Image
-      function getGoogleDriveImage(url) {
-        if (!url || url === "")
-          return "https://via.placeholder.com/600x300/042018/f59e0b?text=DudiTechno";
-        const regex1 = /\/file\/d\/([a-zA-Z0-9_-]+)/;
-        const regex2 = /[?&]id=([a-zA-Z0-9_-]+)/;
-        let match = url.match(regex1) || url.match(regex2);
-        if (match && match[1]) {
-          let fileId = match[1];
-          return `https://lh3.googleusercontent.com/d/${fileId}=w1000-h500-p-k`;
-        }
-        return url; // Jika bukan GDrive (misal imgur), langsung tampil
-      }
-
-      function updatePreview() {
-        document.getElementById("prevImg").src = getGoogleDriveImage(
-          document.getElementById("appImage").value,
-        );
-        document.getElementById("prevCat").innerText =
-          document.getElementById("appCategory").value || "Kategori";
-        document.getElementById("prevName").innerText =
-          document.getElementById("appName").value || "Nama Aplikasi";
-        document.getElementById("prevVer").innerText =
-          `Versi: ${document.getElementById("appVersion").value || "v1.0"}`;
-        document.getElementById("prevDesc").innerText =
-          document.getElementById("appDesc").value ||
-          "Deskripsi akan muncul di sini...";
-      }
-
-      function saveApp(e) {
-        e.preventDefault();
-        const editId = document.getElementById("editId").value;
-        const status = document.querySelector(
-          'input[name="status"]:checked',
-        ).value;
-        const appData = {
-          id: editId ? parseInt(editId) : Date.now(),
-          name: document.getElementById("appName").value,
-          version: document.getElementById("appVersion").value,
-          category: document.getElementById("appCategory").value,
-          link: document.getElementById("appLink").value,
-          desc: document.getElementById("appDesc").value,
-          features: document.getElementById("appFeatures").value,
-          image: document.getElementById("appImage").value,
-          status: status,
-        };
-
-        let apps = JSON.parse(localStorage.getItem("dudi_apps")) || [];
-        if (editId) {
-          apps = apps.map((app) =>
-            app.id === parseInt(editId) ? appData : app,
-          );
-          alert("Aplikasi berhasil diupdate!");
-        } else {
-          apps.push(appData);
-          alert("Aplikasi baru berhasil disimpan!");
+        function login() {
+            document.getElementById('loginGate').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            renderList();
+            fetchAnalytics(); 
         }
 
-        localStorage.setItem("dudi_apps", JSON.stringify(apps));
-        resetForm();
-        renderList();
-      }
+        function fetchAnalytics() {
+            fetch('https://api.counterapi.dev/v1/duditechno/visits')
+                .then(res => res.json())
+                .then(data => { document.getElementById('visitorCount').innerText = data.count || 0; })
+                .catch(() => document.getElementById('visitorCount').innerText = 'Error');
 
-      function renderList() {
-        let apps = JSON.parse(localStorage.getItem("dudi_apps")) || [];
-        const list = document.getElementById("appList");
-
-        if (apps.length === 0) {
-          list.innerHTML =
-            '<p class="text-gray-500 text-sm text-center py-4">Belum ada aplikasi</p>';
-          return;
+            fetch('https://api.counterapi.dev/v1/duditechno/downloads')
+                .then(res => res.json())
+                .then(data => { document.getElementById('downloadCount').innerText = data.count || 0; })
+                .catch(() => document.getElementById('downloadCount').innerText = 'Error');
         }
 
-        list.innerHTML = apps
-          .map(
-            (app) => `
+        const form = document.getElementById('appForm');
+        form.addEventListener('input', updatePreview);
+        form.addEventListener('submit', saveApp);
+
+        function getGoogleDriveImage(url) {
+            if (!url || url === '') return 'https://via.placeholder.com/600x300/042018/f59e0b?text=DudiTechno';
+            const regex1 = /\/file\/d\/([a-zA-Z0-9_-]+)/;
+            const regex2 = /[?&]id=([a-zA-Z0-9_-]+)/;
+            let match = url.match(regex1) || url.match(regex2);
+            if (match && match[1]) {
+                let fileId = match[1];
+                return `https://drive.google.com/thumbnail?id=${fileId}&sz=w600-h300`;
+            }
+            return url;
+        }
+
+        function updatePreview() {
+            document.getElementById('prevImg').src = getGoogleDriveImage(document.getElementById('appImage').value);
+            document.getElementById('prevCat').innerText = document.getElementById('appCategory').value || 'Kategori';
+            document.getElementById('prevName').innerText = document.getElementById('appName').value || 'Nama Aplikasi';
+            document.getElementById('prevVer').innerText = `Versi: ${document.getElementById('appVersion').value || 'v1.0'}`;
+            document.getElementById('prevDesc').innerText = document.getElementById('appDesc').value || 'Deskripsi akan muncul di sini...';
+        }
+
+        // =====================================================
+        // KONEKSI DATABASE FIREBASE (READ, CREATE, UPDATE, DELETE)
+        // =====================================================
+        const dbUrl = "https://duditechno-default-rtdb.asia-southeast1.firebasedatabase.com/apps.json";
+        let currentApps = []; // Untuk menyapat data sementara dari Firebase
+
+        async function renderList() {
+            try {
+                const response = await fetch(dbUrl);
+                currentApps = await response.json();
+                if (!currentApps) currentApps = [];
+            } catch (e) {
+                currentApps = [];
+            }
+
+            const list = document.getElementById('appList');
+            
+            if (currentApps.length === 0) {
+                list.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">Belum ada aplikasi yang diupload</p>';
+                return;
+            }
+
+            list.innerHTML = currentApps.map(app => `
                 <div class="bg-gray-900/50 p-3 rounded-lg flex justify-between items-center">
                     <div>
                         <p class="text-white font-medium">${app.name}</p>
-                        <p class="text-xs text-gray-400">${app.category || "-"} • ${app.status}</p>
+                        <p class="text-xs text-gray-400">${app.category || '-'} • ${app.status}</p>
                     </div>
                     <div class="flex gap-2">
                         <button onclick="editApp(${app.id})" class="text-amber-400 hover:text-amber-300 p-2">
@@ -412,52 +229,87 @@
                         </button>
                     </div>
                 </div>
-            `,
-          )
-          .join("");
-        lucide.createIcons();
-      }
-
-      function editApp(id) {
-        let apps = JSON.parse(localStorage.getItem("dudi_apps")) || [];
-        let app = apps.find((a) => a.id === id);
-        if (app) {
-          document.getElementById("editId").value = app.id;
-          document.getElementById("appName").value = app.name;
-          document.getElementById("appVersion").value = app.version;
-          document.getElementById("appCategory").value = app.category;
-          document.getElementById("appLink").value = app.link;
-          document.getElementById("appDesc").value = app.desc;
-          document.getElementById("appFeatures").value = app.features;
-          document.getElementById("appImage").value = app.image;
-          document.querySelector(
-            `input[name="status"][value="${app.status}"]`,
-          ).checked = true;
-
-          document.getElementById("submitText").innerText = "Update Aplikasi";
-          document.getElementById("cancelBtn").classList.remove("hidden");
-
-          updatePreview();
-          window.scrollTo({ top: 0, behavior: "smooth" });
+            `).join('');
+            lucide.createIcons();
         }
-      }
 
-      function resetForm() {
-        form.reset();
-        document.getElementById("editId").value = "";
-        document.getElementById("submitText").innerText = "Publish Aplikasi";
-        document.getElementById("cancelBtn").classList.add("hidden");
-        updatePreview();
-      }
+        async function saveApp(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editId').value;
+            const status = document.querySelector('input[name="status"]:checked').value;
+            const appData = {
+                id: editId ? parseInt(editId) : Date.now(),
+                name: document.getElementById('appName').value,
+                version: document.getElementById('appVersion').value,
+                category: document.getElementById('appCategory').value,
+                link: document.getElementById('appLink').value,
+                desc: document.getElementById('appDesc').value,
+                features: document.getElementById('appFeatures').value,
+                image: document.getElementById('appImage').value,
+                status: status
+            };
 
-      function deleteApp(id) {
-        if (confirm("Hapus aplikasi ini?")) {
-          let apps = JSON.parse(localStorage.getItem("dudi_apps")) || [];
-          apps = apps.filter((app) => app.id !== id);
-          localStorage.setItem("dudi_apps", JSON.stringify(apps));
-          renderList();
+            if (editId) {
+                currentApps = currentApps.map(app => app.id === parseInt(editId) ? appData : app);
+                alert('Aplikasi berhasil diupdate di Cloud!');
+            } else {
+                currentApps.push(appData);
+                alert('Aplikasi baru berhasil disimpan di Cloud!');
+            }
+
+            // Update seluruh data ke Firebase
+            await fetch(dbUrl, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(currentApps)
+            });
+
+            resetForm();
+            renderList();
         }
-      }
+
+        function editApp(id) {
+            let app = currentApps.find(a => a.id === id);
+            if (app) {
+                document.getElementById('editId').value = app.id;
+                document.getElementById('appName').value = app.name;
+                document.getElementById('appVersion').value = app.version;
+                document.getElementById('appCategory').value = app.category;
+                document.getElementById('appLink').value = app.link;
+                document.getElementById('appDesc').value = app.desc;
+                document.getElementById('appFeatures').value = app.features;
+                document.getElementById('appImage').value = app.image;
+                document.querySelector(`input[name="status"][value="${app.status}"]`).checked = true;
+                
+                document.getElementById('submitText').innerText = 'Update Aplikasi';
+                document.getElementById('cancelBtn').classList.remove('hidden');
+                
+                updatePreview();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        async function deleteApp(id) {
+            if(confirm('Hapus aplikasi ini dari Database Cloud?')) {
+                currentApps = currentApps.filter(app => app.id !== id);
+                
+                await fetch(dbUrl, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentApps)
+                });
+                
+                renderList();
+            }
+        }
+
+        function resetForm() {
+            form.reset();
+            document.getElementById('editId').value = '';
+            document.getElementById('submitText').innerText = 'Publish Aplikasi';
+            document.getElementById('cancelBtn').classList.add('hidden');
+            updatePreview();
+        }
     </script>
-  </body>
+</body>
 </html>
