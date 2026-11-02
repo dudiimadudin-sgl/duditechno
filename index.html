@@ -356,7 +356,7 @@
             const text = document.getElementById('rek-number').innerText;
             navigator.clipboard.writeText(text).then(() => {
                 const toast = document.getElementById('toast');
-                toast.innerText = 'Nomor rekening BSI berhasil disalin!';
+                toast.innerText = 'Nomor rekening Jago berhasil disalin!';
                 toast.className = "toast show";
                 setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
             });
